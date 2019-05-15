@@ -1,0 +1,15 @@
+<?php
+
+$valide_lang = array('ru');
+$native_lang = array('ru','kz','oo');
+
+$spec_list = array();
+
+$db_host = '127.0.0.1';
+$db_port = '5432';
+$db_user = 'root';
+$db_pass = '1111';
+$db_enc = 'UTF8';
+$db_name = 'adictru';
+
+?>
