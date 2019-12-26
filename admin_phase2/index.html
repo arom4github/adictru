@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>форма</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style2.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body class="body_bg">
+
+	<div class="top_line">
+
+	</div>
+
+	<div class="menu_bg" href="https://www.nsu.ru/n/">
+		<div id="navigator">
+		</div>
+	</div>
+
+	<div id="form">
+		<form id="informations" method="POST" action="admin.php">
+
+		<fieldset class="fs">
+			<legend class="search_criteria">Загрузить зарегистрированного пользователя</legend>
+			<table>
+				<tr>
+					<td style="text-align: center; width: 200px;">Идентификационный номер</td>
+					<td><input type="number" id="id_number" name="id_number"></td>
+					<td><input class="mySubmit" onclick="display_loader()" type="submit" name="id_submit" value="Отправить"></td>
+				</tr>
+			</table>
+		</fieldset>
+		</form>
+	</div>
+	<div id="container"><div id="loader"></div></div>
+</body>
+</html>
+
+<script>
+	function display_loader()
+	{
+		document.getElementById('container').style.display='block';
+	}
+</script>
