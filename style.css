@@ -207,6 +207,9 @@ table#nav-tbl{
     font-size: 12px;
     text-align: justify;
 }
+.rsp{
+    cursor:pointer;
+}
 
 .fs{
     

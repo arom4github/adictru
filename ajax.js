@@ -76,10 +76,14 @@ function stateChanged_data() {
                 //alert(resp);
                 obj = document.getElementById("anketa");
                 if(obj) obj.innerHTML=resp[0].toString().match(/[0-9]+/);
-		$('.rsp').click(function(){
-                     var url = "http://search1.ruscorpora.ru/search.xml?env=alpha&mycorp=&mysent=&mysize=&mysentsize="+
-                               "&mydocsize=&dpp=&spp=&spd=&text=lexform&mode=main&sort=gr_tagging&lang=ru&nodia=1&req="+
-                               "\""+$(this).text()+"\"+\""+$(this).parent().parent().children('td.sr_').text()+"\"";
+		$('.rsp').click(function(e){
+                     var url = "";
+		     url  = "http://search1.ruscorpora.ru/search.xml?env=alpha&mycorp=&mysent=&mysize=&mysentsize="+
+                               "&mydocsize=&dpp=&spp=&spd=&text=lexform&mode=main&sort=gr_tagging&lang=ru&nodia=1&req=";
+		     if (e.ctrlKey)
+                         url+="\""+$(this).parent().parent().children('td.sr_').text()+"\"+\""+$(this).text()+"\"";
+		     else
+                         url+="\""+$(this).text()+"\"+\""+$(this).parent().parent().children('td.sr_').text()+"\"";
                      var win = window.open(url, '_blank');
                      win.focus();
 		     //alert($(this).text()+" <- "+$(this).parent().parent().children('td.sr_').text());
