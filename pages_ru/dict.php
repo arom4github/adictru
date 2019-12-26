@@ -240,6 +240,7 @@ function uni_strsplit($string, $split_length=1)
     </div>
 </div>
 <div id='mask'></div> 
+<div id='info'></div> 
 <div id="bdict_selector" class="bdict_selector">
 	Выбор порядка представления информации:
 	<ul>

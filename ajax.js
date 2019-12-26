@@ -88,6 +88,14 @@ function stateChanged_data() {
                      win.focus();
 		     //alert($(this).text()+" <- "+$(this).parent().parent().children('td.sr_').text());
 		});
+		$('.rsp').mouseenter(function(e){
+			x = e.pageX; y = e.pageY; //console.log(x, y);
+  			$('#info').css({ "display":"block","top": y-70, "left": x-200});
+			$('#info').text($(this).parent().parent().children('td.sr_').text()+" -> "+$(this).text());
+		});
+		$('.rsp').mouseleave(function(e){
+  			$('#info').css({"display": "none"});
+		});
         }
 //        edit_reg=0;
 }
