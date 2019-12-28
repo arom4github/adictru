@@ -1,10 +1,11 @@
 <?php
+        include("../include/config.php");
 	session_start();
 
 	$response=$_GET['json'];
 	$rep=json_decode($response);
 
-	$database= pg_connect("host=localhost dbname= user= password=");
+	$database= pg_connect("host={$db_host} dbname={$db_name} user={$db_user} password={$db_pass}");
 	$cpt=1;
 	if($_SESSION['id_user']!=NULL && $_SESSION['id_user']>=27750)
 	{

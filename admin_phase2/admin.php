@@ -1,7 +1,7 @@
 <?php
-
+	include("../include/config.php");
 	session_start();
-	$database= pg_connect("host=localhost dbname= user= password=");
+	$database= pg_connect("host={$db_host} dbname={$db_name} user={$db_user} password={$db_pass}");
 	if(isset($_POST['id_submit']))
 	{
 		$_SESSION['id_user']=(int) $_POST['id_number'];
