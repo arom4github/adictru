@@ -139,6 +139,12 @@ table#nav-tbl{
 	font-size: 12px;
 }
 
+.tbl_contrib tr:nth-child(odd) {background: #CCC}
+.tbl_contrib
+{
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 12px;
+}
 #dict_menu{
 
     font-family: Arial,Helvetica,sans-serif;
