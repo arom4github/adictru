@@ -109,7 +109,7 @@ function dict_request(str){
 }
 
 function chDict(ch){
-    document.forms[0].chr.value = ch;
+    document.forms[0].chr.value = ch+'*';
     AdvSearch_r();
 }
 

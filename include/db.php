@@ -401,16 +401,13 @@ function db_right_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $c
 		if(strlen($spec)>0) $search .= "AND users.spec like '".AddSlashes($spec)."' ";
 		if(strlen($city)>0) $search .= "AND lower(users.city) like '".AddSlashes($city)."' ";
                 if(strlen($chr)>0) {
-		   preg_match_all('`.`u', mb_strtolower($chr, "UTF-8"), $arr);
-		   $arr = array_chunk($arr[0], 1);
-		   $arr = array_map('implode', $arr);
-
-		      if($arr[0] == 'е' && strlen($chr) == 2){
-			$search .= "AND  lower(dict.word) SIMILAR  TO '(е|ё)%'  ";
-		      }else{
-			$search .= "AND lower(dict.word) like '".mb_strtolower($chr, "UTF-8")."%' ";
-		      }
-
+		   $w_search = mb_strtolower($chr, "UTF-8");
+		   $w_search = mb_eregi_replace('е','(е|ё)',$w_search);
+		   $w_search = mb_ereg_replace('%','\\%',$w_search,'g');
+		   $w_search = mb_ereg_replace('\([^\\]\)\\*','\1%',$w_search,'g');
+		   $w_search = mb_ereg_replace('^\\*','%',$w_search,'g');
+		   $w_search = mb_ereg_replace('\\\\\\*','*',$w_search,'g');
+		   $search .= "AND lower(dict.word) like '".mb_strtolower($w_search, "UTF-8")."' ";
                 }
 		// commented  base dict
 		//if($base == 1) $search.= "AND dict.base='T' ";
@@ -532,11 +529,13 @@ function db_back_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $ch
 		      $search .= "AND lower(resp.word) NOT SIMILAR TO 
 					'(а|б|в|г|д|е|ё|ж|з|и|й|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ы|э|ю|я)%' ";
 		   }else{
-		      if($arr[0] == 'е' && strlen($chr) == 2){
-			$search .= "AND  lower(resp.word) SIMILAR  TO '(е|ё)%'  ";
-		      }else{
-		   	$search .= "AND lower(resp.word) like '".mb_strtolower($chr, "UTF-8")."%' ";   
-		      }
+		  	$w_search = mb_strtolower($chr, "UTF-8");
+		  	$w_search = mb_eregi_replace('е','(е|ё)',$w_search);
+		  	$w_search = mb_ereg_replace('%','\\%',$w_search,'g');
+		  	$w_search = mb_ereg_replace('\([^\\]\)\\*','\1%',$w_search,'g');
+		  	$w_search = mb_ereg_replace('^\\*','%',$w_search,'g');
+		  	$w_search = mb_ereg_replace('\\\\\\*','*',$w_search,'g');
+		  	$search .= "AND lower(resp.word) like '".mb_strtolower($w_search, "UTF-8")."' ";
 		   }
 		
 	        }
