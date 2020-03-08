@@ -283,7 +283,7 @@
 	function save_to_json(number)
 	{
 		var variable=document.getElementById("synonym"+number).value;
-		var jj= {"variable":variable};
+		var jj= {"var":variable};
 		return jj;
 	}
 
