@@ -263,6 +263,7 @@ function uni_strsplit($string, $split_length=1)
            <li><a href="#" class="db_link" name="1">СИБАС основной корпус</a>
            <li><a href="#" class="db_link" name="21">Подкорпус ассоциаций военных</a>
            <li><a href="#" class="db_link" name="22">Подкорпус вербальных ассоциаций носителей русского языка в Казахстане</a>
+           <li><a href="#" class="db_link" name="23">Подкорпус вербальных ассоциаций носителей якутского языка</a>
 	</ul>
 </div>
 <?php $url="http://adictru.nsu.ru/dict{$dict}"; ?>
