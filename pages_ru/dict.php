@@ -126,6 +126,8 @@ function uni_strsplit($string, $split_length=1)
         <td><a href="#" class="dict" onClick="show_modal('.db_selector');"><?php echo "База данных" ?></a></td>
 		</table>
 		</td>
+		<td><a href="/media/search_help.pdf"><img src="imgs/question.png" alt="help" align="right" width="20px" border="0"></a>
+		</td>
 		<td>
 		<img src="imgs/document-print.png" alt="print" align="right" width="20px" border="0"
                  onclick="my_print('<?php echo "{$dict}_{$test}"; ?>');">

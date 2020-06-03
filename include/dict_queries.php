@@ -77,6 +77,9 @@ if($dict == "stim")
 
 function getRightDict($t_id, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $chr, $reg, $sort_crt){
 global $locale;
+$rows = db_right_dict_json($t_id, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $chr, $reg, $sort_crt);
+echo json_encode($rows);
+//return;
 ?>
 <table width="100%" border=1 class="result">
     <tr><td>&nbsp;</td>

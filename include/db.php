@@ -501,6 +501,119 @@ function db_right_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $c
 	return Array();
 }
 
+function db_right_dict_json($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $chr, $reg, $sort_order){
+	global $db_host, $db_user, $db_pass, $db_enc, $db_name, $db_port;
+	$res = Array();
+	$conn = connect($db_host, $db_port, $db_name, $db_user, $db_pass, $db_enc);
+	if($conn){
+		$search = "";
+		if($sex == 'M') $search .= "AND users.sex='t' ";
+		if($sex == 'F') $search .= "AND users.sex='f' ";
+		if(strlen($nl)>0) $search .= "AND users.lang_n = '{$nl}' ";
+//		if(strlen($af)>0) $search .= "AND users.age > $af ";
+//		if(strlen($at)>0) $search .= "AND users.age < $at ";
+//		if(strlen($edu)>0) $search .= "AND users.edu in ($edu) ";
+		if(strlen($spec)>0) $search .= "AND users.spec like '".AddSlashes($spec)."' ";
+		if(strlen($city)>0) $search .= "AND lower(users.city) like '".AddSlashes($city)."' ";
+                if(strlen($chr)>0) {
+		   $w_search = mb_strtolower($chr, "UTF-8");
+		   $w_search = mb_eregi_replace('е','(е|ё)',$w_search);
+		   $w_search = mb_ereg_replace('%','\\%',$w_search,'g');
+		   $w_search = mb_ereg_replace('\([^\\]\)\\*','\1%',$w_search,'g');
+		   $w_search = mb_ereg_replace('^\\*','%',$w_search,'g');
+		   $w_search = mb_ereg_replace('\\\\\\*','*',$w_search,'g');
+		   $search .= "AND lower(dict.word) like '".mb_strtolower($w_search, "UTF-8")."' ";
+                }
+		// commented  base dict
+		//if($base == 1) $search.= "AND dict.base='T' ";
+                if($reg != 0) $search.= "AND users.region = {$reg} ";
+		
+		$req = "select resp.word as rw, dict.word, count(resp.word) as cnt, resp.type as rt 
+						from resp inner join dict on dict.id=resp.id_w  
+						inner join users on users.id=resp.id_u 
+						where dict.test={$test} {$search}
+						group by dict.word, rw,  rt
+						order by dict.word, cnt desc, rw;";
+ 		//echo $req."<br>-{$city}-<br>";
+		$result = pg_exec ($conn, $req); 
+		if(!$result){disconnect($conn); return Array();}
+		$word = "";
+		$num = -1;
+		$cnt = Array(0,0,0,0);
+		$resp = Array();
+		$id = -1;
+		for($i=0; $i< pg_numrows($result); $i++){
+			$arr = pg_fetch_array($result, $i);
+			if($word == ""){
+				$word = $arr[1];
+				array_push($resp, Array("word"=>$word, "data"=> Array(), "stat"=>Array(0,0,0,0)));
+				$id++;
+				array_push($resp[$id]['data'], Array("val" => 0, "words" =>Array(), "wtype" => Array()));
+				if($arr[0] != '-'){
+					array_push($resp[$id]['data'][0]['words'], $arr[0]); //$str = $arr[0];
+					array_push($resp[$id]['data'][0]['wtype'], $arr[3]); //$str = $arr[0];
+					$num = $arr[2];
+					$resp[$id]['data'][0]['val'] = $num;
+					$cnt[0] = $arr[2];
+					$cnt[1] = 1;
+					$cnt[2] = ($arr[2] == 1)?1:0;
+					$cnt[3] = 0;
+				}else{
+					$cnt[0] = $arr[2]; $cnt[1] = 0; $cnt[2] = 0; $cnt[3] = $arr[2];
+					$num = $arr[2];
+				}
+			}else{
+				if($word == $arr[1]){
+					if($arr[0] != '-'){
+						if(($num != $arr[2])){
+							array_push($resp[$id]['data'], Array("val" => $arr[2], "words"=>Array($arr[0]), "wtype"=>Array($arr[3])));
+						} else {
+							$el = count($resp[$id]['data'])-1;
+							array_push($resp[$id]['data'][$el]['words'], $arr[0]);
+							array_push($resp[$id]['data'][$el]['wtype'], $arr[3]);
+						}
+						$num = $arr[2];
+						$cnt[0] += $arr[2];
+						$cnt[1] += 1;
+						$cnt[2] += ($arr[2] == 1)?1:0;
+					}else{
+						$cnt[0] += $arr[2];
+						$cnt[3] += $arr[2];
+						$num = $arr[2];
+					}
+				}else{
+					$resp[$id]['stat'] = Array($cnt[0], $cnt[1], $cnt[3], $cnt[2]);
+					$word = $arr[1];
+					array_push($resp, Array("word"=>$word, "data"=> Array(), "stat"=>Array(0,0,0,0)));
+					$id++;
+					array_push($resp[$id]['data'], Array("val" => 0, "words" =>Array(), "wtype"=>Array()));
+
+					if($arr[0] != '-'){
+						array_push($resp[$id]['data'][0]['words'], $arr[0]);
+						$num = $arr[2];
+						$resp[$id]['data'][0]['val'] = $num;
+						$cnt[0] = $arr[2];
+						$cnt[1] = 1;
+						$cnt[2] = ($arr[2] == 1)?1:0;
+						$cnt[3] = 0;
+					}else{
+						$cnt[0] = $arr[2]; $cnt[1] = 0; $cnt[2] = 0; $cnt[3] = $arr[2];
+						$num = $arr[2];
+					}
+				}
+			}
+		}
+                
+		if($word != "") {
+			$resp[$id]['stat'] = Array($cnt[0], $cnt[1], $cnt[3], $cnt[2]);
+		}
+		return $resp;
+	}else{
+		return Array();
+	}
+	return Array();
+}
+
 
 function db_back_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $chr, $reg, $sort_order, $sr, $srf, $srt){
 //function db_back_dict($test){
