@@ -407,7 +407,7 @@ function db_right_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $c
 		   $w_search = mb_ereg_replace('\([^\\]\)\\*','\1%',$w_search,'g');
 		   $w_search = mb_ereg_replace('^\\*','%',$w_search,'g');
 		   $w_search = mb_ereg_replace('\\\\\\*','*',$w_search,'g');
-		   $search .= "AND lower(dict.word) like '".mb_strtolower($w_search, "UTF-8")."' ";
+		   $search .= "AND lower(dict.word) similar to '".mb_strtolower($w_search, "UTF-8")."' ";
                 }
 		// commented  base dict
 		//if($base == 1) $search.= "AND dict.base='T' ";
@@ -419,7 +419,6 @@ function db_right_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $c
 						where dict.test={$test} {$search}
 						group by dict.word, rw 
 						order by dict.word, cnt desc, rw;";
- 		//echo $req."<br>-{$city}-<br>";
 		$result = pg_exec ($conn, $req); 
 		if(!$result){disconnect($conn); return Array();}
 		$str = "";
@@ -648,7 +647,7 @@ function db_back_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $ch
 		  	$w_search = mb_ereg_replace('\([^\\]\)\\*','\1%',$w_search,'g');
 		  	$w_search = mb_ereg_replace('^\\*','%',$w_search,'g');
 		  	$w_search = mb_ereg_replace('\\\\\\*','*',$w_search,'g');
-		  	$search .= "AND lower(resp.word) like '".mb_strtolower($w_search, "UTF-8")."' ";
+		  	$search .= "AND lower(resp.word) similar to '".mb_strtolower($w_search, "UTF-8")."' ";
 		   }
 		
 	        }
