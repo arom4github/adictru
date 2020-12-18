@@ -21,10 +21,11 @@ if(!isset($_GET['page'])){
 }
 
 $dict = "";
-if(isset($_COOKIE["dict"])) $dict = $_COOKIE["dict"];
 if($_GET["test"]){
     setcookie("test", $_GET["test"], time()+36000, "/");
 }
+if(isset($_COOKIE["dict"])) $dict = $_COOKIE["dict"];
+
 if(isset($_GET["dict"])){
     if($_GET["dict"] == "right") $dict="right";
     if($_GET["dict"] == "back") $dict="back";
