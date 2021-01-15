@@ -159,6 +159,7 @@ function uni_strsplit($string, $split_length=1)
 		<div id='rabc_order' class='abc_in'>
 		<?php
 	    $abc = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ";
+            if($test==23) $abc = "АБВГҔДЕЖЗИЙКЛМНҤОӨПРСҺТУҮФХЦЧШЩЫЭЮЯ"; // Sakha
 	    //$abc1= "абвгдежзийклмнопрстуфхцчшщыэюя";
 	    $aabc = uni_strsplit($abc);
             for($i=0; $i<strlen($abc); $i++){
@@ -183,7 +184,8 @@ function uni_strsplit($string, $split_length=1)
             		//for($i=0; $i<strlen($num); $i++){
                   	//	echo "<span  class=\"abc_link\" onclick=\"chDict('".(ord($num[$i]))."')\">".$num[$i]."</span>";
             		//}		
-	    		$abc = "?0123456789АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ";
+	    		$abc = "?АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЫЭЮЯ";
+                        if($test==23) $abc = "?АБВГҔДЕЖЗИЙКЛМНҤОӨПРСҺТУҮФХЦЧШЩЫЭЮЯ"; // Sakha
 	   		$aabc = uni_strsplit($abc);
             		for($i=0; $i<strlen($abc); $i++){
                   		//echo "<span  class=\"abc_link\" onclick=\"chDict('".(ord($abc[2*$i])*256 + ord($abc[2*$i+1]))."')\">".$aabc[$i]."</span>";
@@ -197,7 +199,7 @@ function uni_strsplit($string, $split_length=1)
 			</div>
 			<div id='stim_order' class='abc_in'>
 				Количество стимулов: 
-					<span  class="abc_link" onclick="chDict_st(600, 200);">600-200</span>&nbsp;
+					<span  class="abc_link" onclick="chDict_st(99999, 200);">от 200</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(199, 150);">199-150</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(149, 100);">149-100</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(90, 50);">99-50</span>&nbsp;

@@ -639,7 +639,7 @@ function db_back_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $ch
 //		      $search .= "AND lower(resp.word) NOT SIMILAR TO 
 //					'(0|1|2|3|4|5|6|7|8|9|а|б|в|г|д|е|ё|ж|з|и|й|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ы|э|ю|я)%' ";
 		      $search .= "AND lower(resp.word) NOT SIMILAR TO 
-					'(а|б|в|г|д|е|ё|ж|з|и|й|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ы|э|ю|я)%' ";
+					'(а|б|в|г|д|е|ё|ж|з|и|й|к|л|м|н|о|п|р|с|т|у|ф|х|ц|ч|ш|щ|ы|э|ю|я|ө|ү)%' ";
 		   }else{
 		  	$w_search = mb_strtolower($chr, "UTF-8");
 		  	$w_search = mb_eregi_replace('е','(е|ё)',$w_search);
@@ -668,7 +668,7 @@ function db_back_dict($test, $sex, $af, $at, $edu, $spec, $city, $base, $nl, $ch
 								inner join users on users.id=resp.id_u 
 							where dict.test={$test} and resp.word<>'-' {$search} 
 							group by rw, dict.word, ch {$search1} order by rw, cnt desc, dict.word;";
-//		echo $req;
+		//echo $req;
 		$result = pg_exec ($conn, $req);
 		if(!$result){disconnect($conn); return Array();}
 		$str = "";
