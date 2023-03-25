@@ -28,6 +28,7 @@
 
     <ul class="experiment_links">
         <li><a href="/mkdict/redir.php?t=5FRx9MlmlVNmB" class="dict1">Вход</a> тестовый</li>
+        <li><a href="/mkdict/redir.php?t=16IiQtRLgAYrA" class="dict1">Вход</a> (СИБАС. Третий этап)</li>
 <!--
         <li><a href="/mkdict/redir.php?t=16IiQtRLgAYrA" class="dict1">Вход</a> для жителей заморских французских территорий</li>
         <li><a href="/mkdict/redir.php?t=OW0LU1jT7Hl9c" class="dict1">Вход</a> для жителей Камеруна</li>

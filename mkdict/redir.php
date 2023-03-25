@@ -5,8 +5,8 @@ if(isset($_GET['t'])){
     $t = $_GET['t'];
     if($t == '5FRx9MlmlVNmB')
 		$_SESSION["test_id"] = 20;
-//    elseif($t == '16IiQtRLgAYrA')
-//		$_SESSION["test_id"] = 14;
+    elseif($t == '16IiQtRLgAYrA')
+		$_SESSION["test_id"] = 3;
 //    elseif($t == 'OW0LU1jT7Hl9c')
 //		$_SESSION["test_id"] = 15;
 //    elseif($t == 'eMPamhq4rSWF2')

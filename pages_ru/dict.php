@@ -199,7 +199,7 @@ function uni_strsplit($string, $split_length=1)
 			</div>
 			<div id='stim_order' class='abc_in'>
 				Количество стимулов: 
-					<span  class="abc_link" onclick="chDict_st(99999, 200);">от 200</span>&nbsp;
+					<span  class="abc_link" onclick="chDict_st(99999, 200);">200 и более</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(199, 150);">199-150</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(149, 100);">149-100</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_st(90, 50);">99-50</span>&nbsp;
@@ -207,7 +207,7 @@ function uni_strsplit($string, $split_length=1)
 			</div>
 			<div id='resp_order' class='abc_in'>
 				Количество реакций:
-					<span  class="abc_link" onclick="chDict_rs(11000, 2000);">11000-2000</span>&nbsp;
+					<span  class="abc_link" onclick="chDict_rs(99999, 2000);">2000 и более</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_rs(1999, 1500);">1999-1500</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_rs(1499, 1000);">1499-1000</span>&nbsp;
 					<span  class="abc_link" onclick="chDict_rs(999, 750);">999-750</span>&nbsp;
@@ -265,6 +265,8 @@ function uni_strsplit($string, $split_length=1)
 	Выбор базы данных словарей
 	<ul>
            <li><a href="#" class="db_link" name="1">СИБАС основной корпус</a>
+           <li><a href="#" class="db_link" name="25">СИБАС2 (второй этап эксперимента)</a>
+           <li><a href="#" class="db_link" name="13">СИБАС1 + СИБАС2</a>
            <li><a href="#" class="db_link" name="21">Подкорпус ассоциаций военных</a>
            <li><a href="#" class="db_link" name="22">Подкорпус вербальных ассоциаций носителей русского языка в Казахстане</a>
            <li><a href="#" class="db_link" name="23">Подкорпус вербальных ассоциаций носителей якутского языка</a>
